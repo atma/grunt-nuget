@@ -37,9 +37,7 @@ Repository server url to push to.
 
 #### apikey
 Type: `String`
-API key associated with your account on a remote server. If you use official repository
-  | please go to [nuget.org](http://nuget.org/) and register an account. Once you do that, click on "My Account" to see
-  | an API Key that was generated for you.
+API key associated with your account on a remote server. If you use official repository please go to [nuget.org](http://nuget.org/) and register an account. Once you do that, click on "My Account" to see an API Key that was generated for you.
 
 #### publish
 Type: `Bool`
@@ -51,8 +49,7 @@ An array of package dependencies where `id` is an unique package id registered o
 
 #### pkgIdentity
 Type: `String`
-Since nuget package name will be generated automatically using `pkg.name` and `pkg.version` from your [package.json](http://package.json.nodejitsu.com/) file,
-  | you can generate unique packages suffixed by `.pkgIdentity`. Do not forget to specify a `pkg` in your `gruntfile`. Ex: `pkg: 'grunt.initConfig({ <json:package.json>', ...`.
+Since nuget package name will be generated automatically using `pkg.name` and `pkg.version` from your [package.json](http://package.json.nodejitsu.com/) file, you can generate unique packages suffixed by `.pkgIdentity`. Do not forget to specify a `pkg` in your `gruntfile`. Ex: `pkg: 'grunt.initConfig({ <json:package.json>', ...`.
 
 
 ### Usage Examples
