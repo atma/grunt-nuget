@@ -8,7 +8,7 @@ Since this module is for personal use it is not listed in [npm][npmjs] repositor
 
 ```javascript
 "devDependencies": {
-    "grunt-nuget": "git://github.com/atma/grunt-nuget.git"
+    "grunt-nuget": "https://github.com/atma/grunt-nuget/archive/master.tar.gz"
 }
 ```
 
