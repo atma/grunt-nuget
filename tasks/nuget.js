@@ -1,10 +1,13 @@
 /*
  * grunt-nuget
- * https://github.com/oburkhay/grunt-nuget
+ * https://github.com/atma/grunt-nuget
  *
  * Copyright (c) 2013 Oleh Burkhay
  * Licensed under the MIT license.
  */
+
+"use strict";
+
 module.exports = function(grunt) {
 
   var utils = grunt.util ||  grunt.utils,

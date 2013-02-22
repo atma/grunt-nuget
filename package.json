@@ -27,9 +27,6 @@
   "engines": {
     "node": ">= 0.8.0"
   },
-  "scripts": {
-
-  },
   "devDependencies": {
     "grunt": "~0.3.17",
     "grunt-lib-contrib": "~0.3.0",
