@@ -1,0 +1,42 @@
+{
+  "name": "grunt-nuget",
+  "description": "Create and publish nuget package with grunt.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/atma/grunt-nuget",
+  "author": {
+    "name": "Oleh Burkhay",
+    "email": "oleg.burhay@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/atma/grunt-nuget.git"
+  },
+  "bugs": {
+    "url": "https://github.com/atma/grunt-nuget/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/atma/grunt-nuget/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "grunt.js",
+  "bin": {
+    "grunt-nuget": "bin/grunt-nuget"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+
+  },
+  "devDependencies": {
+    "grunt": "~0.3.17",
+    "grunt-lib-contrib": "~0.3.0",
+    "wrench": "~1.4.4"
+  },
+  "keywords": [
+    "gruntplugin",
+    "nuget"
+  ]
+}
