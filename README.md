@@ -14,7 +14,7 @@ Since this module is for personal use it is not listed in [npm][npmjs] repositor
 
 Then install [grunt-nuget ][grunt_nuget] with: `npm install`
 
-And add this line to your project's `grunt.js` gruntfile:
+And add this line to your project's `Gruntfile.js`
 
 ```javascript
 grunt.loadNpmTasks('grunt-nuget');

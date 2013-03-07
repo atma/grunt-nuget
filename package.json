@@ -28,11 +28,13 @@
     "node": ">= 0.8.0"
   },
   "dependencies": {
-   "grunt-lib-contrib": "~0.3.0",
+   "grunt-lib-contrib": "~0.4.x",
    "wrench": "~1.4.4"
   },
   "devDependencies": {
-    "grunt": "~0.3.17"
+    "grunt": ">= 0.4.x",
+    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-contrib-watch": "~0.2.0"
   },
   "keywords": [
     "gruntplugin",

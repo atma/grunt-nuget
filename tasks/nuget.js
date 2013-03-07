@@ -63,7 +63,7 @@ module.exports = function(grunt) {
       this.files.forEach(function(file, key) {
 
           file.dest = path.normalize(path.join(pkgPath, 'files', file.dest));
-          srcFiles = grunt.file.expandFiles(file.src);
+          srcFiles = grunt.file.expand({filter: 'isFile'}, file.src);
 
           if (srcFiles.length === 0) {
               grunt.fail.warn('Unable to copy; no valid source files were found.');
@@ -116,7 +116,7 @@ module.exports = function(grunt) {
 
       grunt.config.requires('pkg');
 
-      var pkgIdentity = this.data.pkgIdentity;
+      var pkgIdentity = this.data.pkgidentity || '';
       var pkgDependencies = this.data.dependencies;
       var files = wrench.readdirSyncRecursive(pkgPath),
           data = {
@@ -139,15 +139,16 @@ module.exports = function(grunt) {
           });
       });
 
-      var pkgName = grunt.template.process('<%= pkg.name %>.<% if(identity) { %><%= identity %>.<% } %><%= pkg.version %>', {identity: pkgIdentity, pkg: grunt.config.get('pkg')});
+      var pkgName = grunt.template.process('<%= pkg.name %>.<% if(identity) { %><%= identity %>.<% } %><%= pkg.version %>',  {data: {identity: pkgIdentity, pkg: grunt.config.get('pkg')}});
       var specFile = path.join(pkgPath, pkgName + '.nuspec');
       var pkgFile = path.join(pkgPath, pkgName + '.nupkg');
       var specTpl = grunt.file.read(path.join('node_modules/grunt-nuget/tasks', 'templates', 'spec.tpl'));
-      grunt.file.write(specFile, grunt.template.process(specTpl, data));
+      grunt.file.write(specFile, grunt.template.process(specTpl, {data: data}));
 
-      var isPublish = this.data.publish,
-          _apikey = this.data.apikey,
-          _server = this.data.server;
+      var isPublish = typeof this.data.publish !== 'undefined' ? this.data.publish : this.options().publish,
+          _apikey = this.data.apikey || this.options().apikey,
+          _server = this.data.server || this.options().server;
+
       var terminal = require("child_process").exec,
           nugetPath = fs.realpathSync('node_modules/grunt-nuget/bin/NuGet.exe'),
           buildCmd = nugetPath + " Pack " + specFile + ' -OutputDirectory ' + pkgPath,
