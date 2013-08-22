@@ -14,7 +14,72 @@ module.exports = function(grunt) {
       _ = utils._,
       path = require('path'),
       fs = require('fs'),
-      wrench = require('wrench');
+      wrench = require('wrench'),
+      semver = require('semver');
+  
+  var getVersion = function (semver) {
+    //NOTE: NuGet does not support build metadata
+    var result = semver.major + '.' + semver.minor + '.' + semver.patch,
+        prerelease = semver.prerelease.join('.');
+    if (prerelease !== '0' && prerelease !== '') {
+      return result + '-' + prerelease;
+    }
+    return result;
+  };
+
+  var convert = module.exports._convert = function(range) {
+    var set = range.set[0].sort(function(x, y) {
+        return semver.gt(x.semver, y.semver);
+    });
+
+    if (set.length === 1) {
+        var comp = set[0],
+            version = getVersion(comp.semver);
+
+        if (typeof version === 'undefined') {
+            return '';
+        }
+
+        switch (comp.operator) {
+            case '':
+            case '=':
+                return '[' + version + ']';
+            case '>':
+                return '(' + version + ', )';
+            case '>=':
+                return version;
+            case '<':
+                return '(, ' + version + ')';
+            case '<=':
+                return '(, ' + version + ']';
+            default:
+                break; //TODO?
+        }
+
+    } else if (set.length === 2) {
+        var min = set[0],
+            max = set[1],
+            result = '';
+
+        if (min.operator === '>=') {
+            result += '[';
+        } else if (min.operator === '>') {
+            result += '(';
+        }
+
+        result += getVersion(min.semver) + ', ' + getVersion(max.semver);
+
+        if (max.operator === '<') {
+            result += ')';
+        } else if (max.operator === '<=') {
+            result += ']';
+        }       
+
+        return result;
+    } else {
+        //TODO?
+    }
+  };
 
   path.sep = path.sep || path.normalize('/');
 
@@ -116,13 +181,34 @@ module.exports = function(grunt) {
 
       grunt.config.requires('pkg');
 
-      var pkgIdentity = this.data.pkgidentity || '';
-      var pkgDependencies = this.data.dependencies;
+      var pkgIdentity = this.data.pkgidentity || '',
+          dependencies = this.data.dependencies,
+          pkg = grunt.config.get('pkg');
+
+      if (!dependencies && pkg.dependencies) {
+        dependencies = _.map(pkg.dependencies, function (ver, pkg) {
+            var range = null,
+                version = null;
+            try {
+                range = new semver.Range(ver);
+            } catch (e) {
+                //TODO: find best way to handle not range versions
+            }
+            if (range) {
+                version = convert(range);
+            }
+            return {
+                id: pkg,
+                version: version
+            };
+        });
+      }
+
       var files = wrench.readdirSyncRecursive(pkgPath),
           data = {
-              pkg: grunt.config.get('pkg'),
+              pkg: pkg,
               identity: pkgIdentity,
-              dependencies: pkgDependencies,
+              dependencies: dependencies,
               files: []
           };
 

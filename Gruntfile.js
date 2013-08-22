@@ -1,6 +1,9 @@
-"use strict";
+module.exports = function(grunt) { 
+  "use strict";
 
-module.exports = function(grunt) {
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-nodeunit');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Project configuration.
   grunt.initConfig({
@@ -17,8 +20,12 @@ module.exports = function(grunt) {
         files: ['<%= jshint.libs_n_tests %>'],
         tasks: ['jshint:libs_n_tests']
       },
+      tests: {
+        files: ['test/**/*.js', 'tasks/**/*.js'],
+        tasks: ['nodeunit']
+      },
       files: '<%= lint.files %>',
-      tasks: ['default']
+      tasks: ['default', 'nodeunit']
     },
     jshint: {
       gruntfile: ['Gruntfile.js'],
@@ -36,8 +43,11 @@ module.exports = function(grunt) {
         boss: true,
         eqnull: true,
         node: true,
-       es5: true
+        es5: true
       }
+    },
+    nodeunit: {
+      all: ['test/**/*.js']
     }
   });
 
@@ -46,5 +56,4 @@ module.exports = function(grunt) {
 
   // Default task.
   grunt.registerTask('default', ['jshint']);
-
 };
