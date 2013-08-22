@@ -18,12 +18,16 @@ module.exports = function(grunt) {
       semver = require('semver');
   
   var getVersion = function (semver) {
-    //NOTE: NuGet does not support build metadata
-    var result = semver.major + '.' + semver.minor + '.' + semver.patch,
-        prerelease = semver.prerelease.join('.');
-    if (prerelease !== '0' && prerelease !== '') {
-      return result + '-' + prerelease;
+    // NOTE: At least in semver v2.1.0 values can be undefined but semver.format() returns 1.0.0 for a range of empty string
+    var result,
+        prerelease = typeof semver.prerelease !== 'undefined' ? semver.prerelease.join('.') : '';
+
+    if (prerelease !== '' && prerelease !== '0') {
+        result = semver.format();
+    } else if (typeof semver.major !== 'undefined') {
+        result = semver.major + '.' + semver.minor + '.' + semver.patch;
     }
+
     return result;
   };
 
@@ -47,7 +51,7 @@ module.exports = function(grunt) {
             case '>':
                 return '(' + version + ', )';
             case '>=':
-                return version;
+                return '[' + version + ', )';
             case '<':
                 return '(, ' + version + ')';
             case '<=':

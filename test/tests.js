@@ -57,13 +57,13 @@ module.exports = {
     'Can convert "greater than specific" version 2': function (test) {
         var range = new semver.Range('>1.0');
         var conveted = convert(range);
-        test.equal(conveted, '1.1.0');
+        test.equal(conveted, '[1.1.0, )');
         test.done();
     },
     'Can convert "greater than specific" version 3': function (test) {
         var range = new semver.Range('>1');
         var conveted = convert(range);
-        test.equal(conveted, '2.0.0');
+        test.equal(conveted, '[2.0.0, )');
         test.done();
     },
     'Can convert "less than specific" version 1': function (test) {
@@ -87,19 +87,19 @@ module.exports = {
     'Can convert "greater than or equal to" version 1': function (test) {
         var range = new semver.Range('>=1.0.0');
         var conveted = convert(range);
-        test.equal(conveted, '1.0.0');
+        test.equal(conveted, '[1.0.0, )');
         test.done();
     },
     'Can convert "greater than or equal to" version 2': function (test) {
         var range = new semver.Range('>=1.0');
         var conveted = convert(range);
-        test.equal(conveted, '1.0.0');
+        test.equal(conveted, '[1.0.0, )');
         test.done();
     },
     'Can convert "greater than or equal to" version 3': function (test) {
         var range = new semver.Range('>=1');
         var conveted = convert(range);
-        test.equal(conveted, '1.0.0');
+        test.equal(conveted, '[1.0.0, )');
         test.done();
     },
     'Can convert "less than or equal to" version 1': function (test) {
@@ -196,7 +196,7 @@ module.exports = {
     'Can convert range to version 3': function (test) {
         var range = new semver.Range('>=2');
         var conveted = convert(range);
-        test.equal(conveted, '2.0.0');
+        test.equal(conveted, '[2.0.0, )');
         test.done();
     },
     'Can convert range to version 4': function (test) {
