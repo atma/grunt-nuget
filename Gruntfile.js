@@ -39,11 +39,10 @@ module.exports = function(grunt) {
         noarg: true,
         sub: true,
         undef: true,
-        unused: true,
+        unused: false,
         boss: true,
         eqnull: true,
-        node: true,
-        es5: true
+        node: true
       }
     },
     nodeunit: {
@@ -55,5 +54,5 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   // Default task.
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('default', ['jshint', 'nodeunit']);
 };
