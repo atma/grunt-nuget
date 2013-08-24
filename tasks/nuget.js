@@ -15,7 +15,8 @@ module.exports = function(grunt) {
       path = require('path'),
       fs = require('fs'),
       wrench = require('wrench'),
-      semver = require('semver');
+      semver = require('semver'),
+      os = require('os');
   
   var getVersion = function (semver) {
     // NOTE: At least in semver v2.1.0 values can be undefined but semver.format() returns 1.0.0 for a range of empty string
@@ -240,8 +241,13 @@ module.exports = function(grunt) {
           _server = this.data.server || this.options().server;
 
       var terminal = require("child_process").exec,
-          nugetPath = fs.realpathSync('node_modules/grunt-nuget/bin/NuGet.exe'),
-          buildCmd = nugetPath + " Pack " + specFile + ' -OutputDirectory ' + pkgPath,
+          nugetPath = fs.realpathSync('node_modules/grunt-nuget/bin/NuGet.exe');
+
+          if (!/win32/.test(os.platform())) {
+              nugetPath = 'mono --runtime=v4.0.30319 --gc=sgen ' + nugetPath;
+          }
+
+          var buildCmd = nugetPath + " Pack " + specFile + ' -OutputDirectory ' + pkgPath,
           publishCmd = nugetPath + " Push " + pkgFile + ' -Source ' + _server + ' -NonInteractive -ApiKey ' + _apikey;
 
       var done = this.async();
