@@ -21,6 +21,9 @@
     }
   ],
   "main": "grunt.js",
+  "scripts": {
+    "test": "grunt"
+  },
   "bin": {
     "grunt-nuget": "bin/grunt-nuget"
   },
