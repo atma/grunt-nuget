@@ -1,5 +1,7 @@
 # grunt-nuget
 
+[![Build Status](https://travis-ci.org/atma/grunt-nuget.png)](https://travis-ci.org/atma/grunt-nuget)
+
 Create nuget package with grunt.
 
 ## Getting Started
