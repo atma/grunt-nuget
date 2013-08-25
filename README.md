@@ -87,8 +87,6 @@ nuget: {
 ```
 This will create two nuget packages in nuget_packages directory. The second will be published automatically to repository indicated by `server` param.
 
-_Note: Win32 only_
-
 ## License
 Copyright (c) 2013 Oleh Burkhay  
 Licensed under the MIT license.
