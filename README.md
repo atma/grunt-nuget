@@ -51,7 +51,8 @@ An array of package dependencies where `id` is an unique package id registered o
 
 #### pkgIdentity
 Type: `String`
-Since nuget package name will be generated automatically using `pkg.name` and `pkg.version` from your [package.json](http://package.json.nodejitsu.com/) file, you can generate unique packages suffixed by `.pkgIdentity`. Do not forget to specify a `pkg` in your `gruntfile`. Ex: `grunt.initConfig({ pkg: grunt.file.readJSON('package.json'), ...`.
+Since nuget package name will be generated automatically using `pkg.name` and `pkg.version` from your [package.json](http://package.json.nodejitsu.com/) file, you can generate unique packages suffixed by `.pkgIdentity`. This can be helpful when the same code will be used in projects with different file structure. As a result we can generate a few packages with the same content but different by structure.
+Do not forget to specify a `pkg` in your `gruntfile`. Ex: `grunt.initConfig({ pkg: grunt.file.readJSON('package.json'), ...`.
 
 
 ### Usage Examples

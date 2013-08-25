@@ -186,7 +186,7 @@ module.exports = function(grunt) {
 
       grunt.config.requires('pkg');
 
-      var pkgIdentity = this.data.pkgidentity || '',
+      var pkgIdentity = this.data.pkgIdentity || '',
           dependencies = this.data.dependencies,
           pkg = grunt.config.get('pkg');
 
