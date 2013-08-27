@@ -1,5 +1,7 @@
 # grunt-nuget
 
+[![Build Status](https://travis-ci.org/atma/grunt-nuget.png)](https://travis-ci.org/atma/grunt-nuget)
+
 Create nuget package with grunt.
 
 ## Getting Started
@@ -49,7 +51,8 @@ An array of package dependencies where `id` is an unique package id registered o
 
 #### pkgIdentity
 Type: `String`
-Since nuget package name will be generated automatically using `pkg.name` and `pkg.version` from your [package.json](http://package.json.nodejitsu.com/) file, you can generate unique packages suffixed by `.pkgIdentity`. Do not forget to specify a `pkg` in your `gruntfile`. Ex: `pkg: 'grunt.initConfig({ <json:package.json>', ...`.
+Since nuget package name will be generated automatically using `pkg.name` and `pkg.version` from your [package.json](http://package.json.nodejitsu.com/) file, you can generate unique packages suffixed by `.pkgIdentity`. This can be helpful when the same code will be used in projects with different file structure. As a result we can generate a few packages with the same content but different by structure.
+Do not forget to specify a `pkg` in your `gruntfile`. Ex: `grunt.initConfig({ pkg: grunt.file.readJSON('package.json'), ...`.
 
 
 ### Usage Examples
@@ -84,8 +87,6 @@ nuget: {
 }
 ```
 This will create two nuget packages in nuget_packages directory. The second will be published automatically to repository indicated by `server` param.
-
-_Note: Win32 only_
 
 ## License
 Copyright (c) 2013 Oleh Burkhay  

@@ -1,7 +1,7 @@
 {
   "name": "grunt-nuget",
   "description": "Create and publish nuget package with grunt.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/atma/grunt-nuget",
   "author": {
     "name": "Oleh Burkhay",
@@ -21,6 +21,9 @@
     }
   ],
   "main": "grunt.js",
+  "scripts": {
+    "test": "grunt"
+  },
   "bin": {
     "grunt-nuget": "bin/grunt-nuget"
   },
@@ -28,15 +31,15 @@
     "node": ">= 0.8.0"
   },
   "dependencies": {
+    "grunt-lib-contrib": "~0.4.0",
+    "wrench": "~1.4.4",
+    "semver": "~2.1.0"
   },
   "devDependencies": {
     "grunt": ">= 0.4.1",
-    "grunt-lib-contrib": "~0.4.x",
     "grunt-contrib-jshint": "~0.6.3",
     "grunt-contrib-watch": "~0.5.2",
-    "grunt-contrib-nodeunit": "~0.2.0",
-    "wrench": "~1.4.4",
-    "semver": "~2.1.0"
+    "grunt-contrib-nodeunit": "~0.2.0"
   },
   "keywords": [
     "gruntplugin",

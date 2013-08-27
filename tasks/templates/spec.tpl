@@ -11,6 +11,7 @@
         <% } %>
         <owners />
         <% if(pkg.homepage) { %><projectUrl><%= pkg.homepage %></projectUrl><% } %>
+        <% if(pkg.icon) { %><iconUrl><%= pkg.icon %></iconUrl><% } %>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description><%= pkg.description %></description>
         <copyright />
